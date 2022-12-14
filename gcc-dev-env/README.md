@@ -6,7 +6,7 @@ MSDN Subscription
 rover login
 
 # optional - set to correct subscription
-az account set --subscription e22a351f-db36-4a02-9793-0f2189d5f3ab
+az account set --subscription <your subscription id>
 
 cd gcc-dev-env
 
