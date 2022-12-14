@@ -1,4 +1,4 @@
-# Terraform for GCC gcci models scaffolding
+# Terraform for GCC development environment
 ##### Original Authored by: Jason Pang  
 
 Use your MSDN Subscription
