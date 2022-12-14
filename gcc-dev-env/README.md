@@ -1,7 +1,7 @@
 # Terraform for GCC gcci models scaffolding
-##### Authored by: Jason Pang  
+##### Original Authored by: Jason Pang  
 
-MSDN Subscription
+Use your MSDN Subscription
 ```bash
 rover login
 
