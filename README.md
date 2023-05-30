@@ -1,48 +1,68 @@
-[![Gitter](https://badges.gitter.im/aztfmod/community.svg)](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+# CAF Terraform for GCC - Lab
 
-# Cloud Adoption Framework landing zones for Terraform - GCC Starter Kit
+## Getting Started
 
-Microsoft Cloud Adoption Framework for Azure provides you with guidance and best practices to adopt Azure.
+Clone the repo to your laptop
 
-A landing zone is a segment of a cloud environment, that has been preprovisioned through code, and is dedicated to the support of one or more workloads. Landing zones provide access to foundational tools and controls to establish a compliant place to innovate and build new workloads in the cloud, or to migrate existing workloads to the cloud. Landing zones use defined sets of cloud services and best practices to set you up for success.
+Open the working folder in Visual Studio Code
 
-## :rocket: Getting started: go read the docs!
+(if required), install VSCode extension “Remote-Containers”
 
-When starting an enterprise deployment, we recommend you start creating a configuration repository where you craft the configuration files for your environments.
+Note: reopen in container when prompt in VS code
 
-The best way to start is to clone the platform starter repository and getting started with the configuration files. This repository helps you create the level 3 and level 4 - applications in the CAF Terraform model.
+## Lab 1 - GCC Development Environment
 
-We recommend that you review the documentation: 📚 Read our centralized documentation page
+Go to /tf/caf/gcc-dev-env/README.md and follow the steps in the readme file.
 
-## Community
+## Lab 2 - Launchpad
 
-Feel free to open an issue for feature or bug, or to submit a pull request.
+Go to /tf/caf/gcc_starter/landingzone/configuration/level0/launchpad/README.md and follow the steps in the readme file.
 
-In case you have any question, you can reach out to tf-landingzones at microsoft dot com.
+## Lab 3 - Networking
 
-You can also reach us on [Gitter](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+Go to /tf/caf/gcc_starter/landingzone/configuration/level3/networking_spoke_internet/README.md and follow the steps in the readme file.
 
-## Contributing
+## Lab 4 - Solution Accelerator
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+Go to /tf/caf/gcc_starter/landingzone/configuration/level4/vm_windows/Readme.md and follow the steps in the readme file.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+## Lab 5 - Clean up 
 
-## Code of conduct
-This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
+```bash
+rover -lz rover -lz /tf/caf/landingzones/caf_solution \
+-level level4 \
+-var-folder /tf/caf/gcc_starter/landingzone/configuration/level4/vm_windows \
+-parallelism 30 \
+-env sandpit \
+-tfstate solution_accelerators_vm_windows.tfstate \
+-a destroy
+```
 
-## Trademarks
+```bash
+rover -lz rover -lz /tf/caf/landingzones/caf_solution \
+-level level3 \
+-var-folder /tf/caf/gcc_starter/landingzone/configuration/level3/networking_spoke_internet \
+-env sandpit \
+-tfstate networking_spoke_internet.tfstate \
+-a destroy
+```
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
-trademarks or logos is subject to and must follow
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+```bash
+rover -lz /tf/caf/landingzones/caf_launchpad \
+  -launchpad \
+  -var-folder /tf/caf/gcc_starter/landingzone/configuration/level0/launchpad \
+  -parallelism 30 \
+  -env sandpit \
+  -a destroy
+```
+
+```bash
+cd gcc-dev-env
+terraform destroy
+cd ..
+```
+
+
+## Troubleshooting Tips
+1. Unable to create KeyVault or there is existing keyvault name, then go to managed deleted vaults to ensure all deleted keyvaults are purge.

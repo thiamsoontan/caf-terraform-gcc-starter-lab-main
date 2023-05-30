@@ -12,11 +12,6 @@
 **/*.log
 **/backend.azurerm.tf
 public
-/aztfmod
-/landingzones
-/rover
-/eslz
-/starter
 **/*.crt
 **/*.csr
 **/*.key

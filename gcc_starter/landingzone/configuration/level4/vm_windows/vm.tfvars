@@ -82,10 +82,8 @@ virtual_machines = {
     networking_interfaces = {
       nic0 = {
         # Value of the keys from networking.tfvars
-        #vnet_key                = "vnet_region1"
-        #subnet_key              = "example"
-        # management infra subnet        
-        subnet_id = "/subscriptions/e22a351f-db36-4a02-9793-0f2189d5f3ab/resourceGroups/gcci-rg-agency-vnets/providers/Microsoft.Network/virtualNetworks/gcci-vnet-internet/subnets/ignite-snet-app-internet"
+        vnet_key                = "vnet_region1"
+        subnet_key              = "example"
         name                    = "0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "nic0"
@@ -153,11 +151,10 @@ keyvaults = {
     purge_protection_enabled    = false    # set to true for production    
 
     tags = { 
-      purpose = "{{zone_code}} vm windows server key vault" 
-      project-code = "{{project_code}}" 
-      env = "{{caf_environment}}" 
-      zone = "{{zone_code}}"
-      tier = "{{tier_code}}"          
+      purpose = "vm windows server key vault" 
+      project-code = "ignite" 
+      env = "sandpit" 
+      zone = "internet"                
     }    
 
     creation_policies = {
